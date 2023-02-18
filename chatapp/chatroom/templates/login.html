@@ -1,0 +1,45 @@
+<!-- chatroom/login.html -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Log in</button>
+</form>
+
+<!-- chatroom/register.html -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+
+<!-- chatroom/chatrooms.html -->
+<h1>Chat Rooms</h1>
+<ul>
+    {% for chatroom in chatrooms %}
+    <li><a href="{% url 'chatroom' chatroom.id %}">{{ chatroom.name }}</a></li>
+    {% endfor %}
+</ul>
+<a href="{% url 'create_chatroom' %}">Create a new chat room</a>
+
+<!-- chatroom/create_chatroom.html -->
+<form method="post">
+    {% csrf_token %}
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <button type="submit">Create</button>
+</form>
+
+<!-- chatroom/chatroom.html -->
+<h1>{{ chatroom.name }}</h1>
+<ul>
+    {% for message in messages %}
+    <li>{{ message.user.username }}: {{ message.text }}</li>
+    {% endfor %}
+</ul>
+<form method="post" action="{% url 'send_message' chatroom.id %}">
+    {% csrf_token %}
+    <label for="text">Message:</label>
+    <input type="text" id="text" name="text">
+    <button type="submit">Send</button>
+</form>
+<a href="{% url 'chatrooms' %}">Back to chat rooms</a>
