@@ -16,3 +16,5 @@ class Message(models.Model):
 
     def __str__(self):
         return f'{self.sender.username} in {self.chatroom.name}: {self.text}'
+
+# Path: chatroom\templates\chatroom.html

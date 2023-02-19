@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Chatroom, Message
 
 @login_required
-def chatroom_view(request, chatroom_id):
+def chatroom(request, chatroom_id):
     # Get the chatroom object for the given ID
     chatroom = Chatroom.objects.get(id=chatroom_id)
     
@@ -15,3 +15,6 @@ def chatroom_view(request, chatroom_id):
         'chatroom': chatroom,
         'messages': messages,
     })
+
+def error_404(request, exception):
+    return render(request, '404.html')
