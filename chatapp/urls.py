@@ -20,3 +20,4 @@ urlpatterns = [
     path('', include('chatroom.urls')),
     path('admin/', admin.site.urls),
 ]
+
